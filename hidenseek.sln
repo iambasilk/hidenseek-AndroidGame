@@ -1,0 +1,35 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{8BBA7D2C-8A85-9960-11EC-B35E10E875EB}") = "hidenseek", "Assembly-CSharp-firstpass.csproj", "{2415EC31-415E-D5A8-DA30-0AE28954BD2E}"
+EndProject
+Project("{8BBA7D2C-8A85-9960-11EC-B35E10E875EB}") = "hidenseek", "Assembly-CSharp.csproj", "{F2734A38-8D83-9163-4351-57B3E5AA0676}"
+EndProject
+Project("{8BBA7D2C-8A85-9960-11EC-B35E10E875EB}") = "hidenseek", "Assembly-CSharp-Editor.csproj", "{E7D4B9A7-33AB-DDA8-8788-602C200763EC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2415EC31-415E-D5A8-DA30-0AE28954BD2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2415EC31-415E-D5A8-DA30-0AE28954BD2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2415EC31-415E-D5A8-DA30-0AE28954BD2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2415EC31-415E-D5A8-DA30-0AE28954BD2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2734A38-8D83-9163-4351-57B3E5AA0676}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2734A38-8D83-9163-4351-57B3E5AA0676}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2734A38-8D83-9163-4351-57B3E5AA0676}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2734A38-8D83-9163-4351-57B3E5AA0676}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7D4B9A7-33AB-DDA8-8788-602C200763EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7D4B9A7-33AB-DDA8-8788-602C200763EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7D4B9A7-33AB-DDA8-8788-602C200763EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7D4B9A7-33AB-DDA8-8788-602C200763EC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal

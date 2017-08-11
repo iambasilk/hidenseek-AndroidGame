@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/EasyTouch/Example/C# Example/Examples for EasyTouch/TwoFinger.unity
+  isLoaded: 1
+  isActive: 1
