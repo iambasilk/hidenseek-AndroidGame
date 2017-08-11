@@ -1,31 +1,47 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class touchTest: MonoBehaviour {
 
-	Ray ray;
-	RaycastHit hit;
+	void OnEnable(){
 
-	public Text puzzletext;
-	public Text hinttext;
+		EasyTouch.On_DoubleTap += On_DoubleTap;
+	}
+	// Unsubscribe
+	void OnDisable(){
+
+		EasyTouch.On_DoubleTap -= On_DoubleTap;
+	}
+	// Unsubscribe
+	void OnDestroy(){
+
+		EasyTouch.On_DoubleTap -= On_DoubleTap;
+	}
+
+
+
+
+	public  Text puzzletext;
+	public  Text hinttext;
 	public Canvas PuzzleCanvas;
 	public Canvas GameoverCanvas;
+	public Canvas gotobjectcanvas;
 	public Canvas HintCanvas;
 	public Canvas optionCanvas;
 	public Canvas areyousuretoexit;
-	public Canvas gotobjectcanvas;
 	public Text Resulttext;
 	//public Text Scoretext;
 
-	string[] mytags = new string[] { "chair", "desk","Cauldron" };
+	 string[] mytags = new string[] { "chair", "desk","Cauldron" };
 	string randomselected=null;
-	int randomselectedindex=0;
+	 int randomselectedindex=0;
 
-	string[] puzzles=new string[]{"I have four legs but can not walk I have a back and cannot talk? ","Skip to the place of work\nTouch nothing but look near\nOn the surface I do lurk"," It had a magical association for centuries."};//
-	string[] hints=new string[]{"Relax","Time to Work","Must for kitchen"};
+	string[] puzzles=new string[]{"I have four legs but can not walk and I cannot talk? ","Skip to the place of work\nTouch nothing but look near\nOn the surface I do lurk"," It had a magical association for centuries."};//
+	string[] hints=new string[]{"We use for Relaxatoin","Time to Work","Must for kitchen"};
 
-	int faultcount=0;int upcount=10;int downcount=5;
+	int faultcount=0; int upcount=10; int downcount=5;
 
 	// Use this for initialization
 	void Start () {
@@ -36,71 +52,64 @@ public class touchTest: MonoBehaviour {
 		optionCanvas.enabled = false;
 		areyousuretoexit.enabled = false;
 		gotobjectcanvas.enabled = false;
+
 		randomselectedindex = 0;
 		randomselectedindex = Random.Range (0, mytags.Length);
+		randomselected = null;
 		randomselected=mytags[randomselectedindex];
 		puzzletext.text=puzzles[randomselectedindex];
 		hinttext.text=hints[randomselectedindex];
+	}
+
+	public void On_DoubleTap( Gesture gesture) 
+	{
+		Debug.Log( "doubled tapped");
+
+		if (gesture.pickObject.tag == randomselected) 
+		{
+			Debug.Log ("cooooooooooooooooooooolllllman");
+			ScoreManager.score = ScoreManager.score + upcount;
+			HintCanvas.enabled = false;
+			//randomselectedindex = 0;
+			randomselectedindex = Random.Range (0, mytags.Length);
+			//randomselected = null;
+			randomselected=mytags[randomselectedindex];
+			puzzletext.text=puzzles[randomselectedindex];
+			hinttext.text=hints[randomselectedindex];
+
+		
+		}
+
+		if (gesture.pickObject.tag !=randomselected)
+		{
+			Debug.Log( "wrongobject with faultcount="+faultcount);
+			ScoreManager.score = ScoreManager.score -downcount ;
+			faultcount++;
+			if (faultcount > 2) 
+			{  
+				Resulttext.text="Oops!!You Failed to find Mojo ";
+				Gameover ();
+
+			}	
+
+		}
 
 	}
-	public string randomselect(){
-		randomselected=null;
 
 
-		  //randomselected = mytags[Random.Range (0, mytags.Length-1)];//
-		randomselected=mytags[randomselectedindex];
-		return randomselected;
 
-	}
-	
 	// Update is called once per frame
 	void Update ()
 	{
 		if (Input.GetKeyDown (KeyCode.Escape)) { //to quit from game
 			areyousuretoexit.enabled = true;
-			Application.Quit ();
+
 		}
-		//for (var i = 0; i < Input.touchCount; i++) {
-			if (Input.touchCount > 0 || Input.GetTouch (0).phase == TouchPhase.Began) {
-
-				ray = Camera.main.ScreenPointToRay (Input.GetTouch (0).position);
-
-				//Debug.DrawRay (ray.origin, ray.direction * 20, Color.red);
-
-				if (Physics.Raycast (ray, out hit, Mathf.Infinity)) {
-					Debug.Log ("Hit something");
-
-
-					if (Input.GetTouch (0).tapCount == 2 && hit.transform.gameObject.tag == randomselected) {
-						ScoreManager.score=  ScoreManager.score + upcount;
-						Resulttext.text = "Congratulations You found Mojo";
-					//	Scoretext.text = ScoreManager.score.ToString();
-						Gameover();
-					}
-					else 
-					if(Input.GetTouch (0).tapCount == 2 && hit.transform.gameObject.tag != randomselected){
-						faultcount = faultcount + 1;
-						ScoreManager.score = ScoreManager.score -downcount ;
-						
-					}
-					if (faultcount > 4) {
-						Resulttext.text="Oops!!You Failed to find Mojo ";
-						//Scoretext.text = ScoreManager.score.ToString();
-						Gameover ();
-					}
-
-				}
-			}
-
-		//}
-
-       
 
 
 
-
+					
 	}
-
 
 			
 
@@ -159,7 +168,10 @@ public class touchTest: MonoBehaviour {
 	}
 	public void restartgame()//res
 	{
+		
+		//SceneManager.LoadScene ("ingame_Scene");
 		Application.LoadLevel ("ingame_Scene");
+
 	}
 
 }

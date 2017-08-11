@@ -52,7 +52,18 @@ void Update ()
 			Gameover ();
 
 		}
-		
+
+		//rounding off
+		if (Mathf.Round (seconds) <= 9) {
+
+			timerLabel.text = string.Format ("{0:00} : {1:00} ", minutes, seconds);
+
+		} else {
+
+			timerLabel.text = string.Format ("{0:00} : {1:00} ", minutes, seconds);
+
+		}
+
 
 	}
 }
